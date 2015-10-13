@@ -14,18 +14,37 @@ public class PlayerControl : MonoBehaviour {
 	public Boundary boundary;
 
 	public Rigidbody rb;
-
+#if UNITY_ANDROID || UNITY_IPHONE
 	bool isTouching=false;
+#endif
 
 	private float moveHorizontal;
 	private float moveVertical;
+
+	public float shotRate;
+	public float nextShot;
+
+	public GameObject bullet;
+	public Transform bulletSpawn;
+
 	void Start()
 	{
+		nextShot = 0.0f;
 		rb = GetComponent<Rigidbody>();
 	}
+
+	void Update()
+	{
+		if (Time.time > nextShot) 
+		{
+			nextShot = Time.time + shotRate;
+			Instantiate (bullet, bulletSpawn.position, bulletSpawn.rotation);
+		}
+	}
+
 	void FixedUpdate()
 	{
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_WEBPLAYER || UNITY_STANDALONE_LINUX
 		moveHorizontal = Input.GetAxis ("Horizontal");
 		moveVertical = Input.GetAxis ("Vertical");
 		
@@ -48,8 +67,9 @@ public class PlayerControl : MonoBehaviour {
 				Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 				RaycastHit hit = new RaycastHit();
 				if(Physics.Raycast(ray, out hit)){
-					if(hit.collider.gameObject.name == "Player")
+					if(hit.collider.gameObject.name == "Bound"){
 						isTouching=true;
+					}
 				}
 			}
 			//Move object
