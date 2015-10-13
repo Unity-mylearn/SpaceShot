@@ -27,9 +27,11 @@ public class PlayerControl : MonoBehaviour {
 	public GameObject bullet;
 	public Transform bulletSpawn;
 
+	AudioSource audio;
 	void Start()
 	{
 		nextShot = 0.0f;
+		audio = GetComponent<AudioSource>();
 		rb = GetComponent<Rigidbody>();
 	}
 
@@ -38,6 +40,7 @@ public class PlayerControl : MonoBehaviour {
 		if (Time.time > nextShot) 
 		{
 			nextShot = Time.time + shotRate;
+			audio.Play();
 			Instantiate (bullet, bulletSpawn.position, bulletSpawn.rotation);
 		}
 	}
