@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	public GameObject reference;
+	public GameObject[] reference;
 	public Vector3 spawnValues;
 
 
@@ -62,9 +62,10 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSeconds (startWait);
 		while (true) {
 			for (int i = 0; i < asteroidCount; i++) {
+				GameObject hazard = reference [Random.Range (0, reference.Length)];
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (reference, spawnPosition, spawnRotation);
+				Instantiate (hazard, spawnPosition, spawnRotation);
 				yield return new WaitForSeconds(spawnWait);
 			}
 			yield return new WaitForSeconds(waveWait);

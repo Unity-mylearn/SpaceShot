@@ -25,12 +25,14 @@ public class AsteroidDestory : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider other) 
 	{
-		if (other.tag == "Boundary")
+		if (other.tag == "Boundary" || other.tag == "Enemy")
 		{
 			return;
 		}
-		Instantiate (explosion, transform.position, transform.rotation);
-		gameController.addScore (scoreValue);
+		if (explosion != null) {
+			Instantiate (explosion, transform.position, transform.rotation);
+			gameController.addScore (scoreValue);
+		}
 		if (other.tag == "Player") 
 		{
 			Instantiate(playerExplosion,other.transform.position,other.transform.rotation);

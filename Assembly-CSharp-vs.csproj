@@ -58,8 +58,10 @@
      <Compile Include="Assets\Done\Done_Scripts\Done_WeaponController.cs" />
      <Compile Include="Assets\Scripts\AsteroidDestory.cs" />
      <Compile Include="Assets\Scripts\AsteroidRotation.cs" />
+     <Compile Include="Assets\Scripts\BgMover.cs" />
      <Compile Include="Assets\Scripts\Bound.cs" />
      <Compile Include="Assets\Scripts\BulletMove.cs" />
+     <Compile Include="Assets\Scripts\EnemyControl.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Mover.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
